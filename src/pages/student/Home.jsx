@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import StudentRightbar from '../../components/StudentRightbar'
+
+import StudentRightBar1 from '../../components/StudentRightBar1'
 
 
 
@@ -136,7 +137,7 @@ const Home = () => {
                 : 'No match found related to this job'
             }
           </div>}
-        <div className='fixed top-16 right-0'> {show === true ? <StudentRightbar job={Viewjob} /> : ''}</div>
+        <div className='fixed top-16 right-0'> {show === true ? <StudentRightBar1 job={Viewjob} /> : ''}</div>
       </div>
 
     </div>

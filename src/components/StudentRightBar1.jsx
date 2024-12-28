@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const StudentRightbar = (props) => {
+const StudentRightBar1 = (props) => {
   let job = props.job
   console.log(job)
 
@@ -57,4 +57,4 @@ const StudentRightbar = (props) => {
   )
 }
 
-export default StudentRightbar
+export default StudentRightBar1
