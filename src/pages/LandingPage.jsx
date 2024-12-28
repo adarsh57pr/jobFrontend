@@ -55,7 +55,7 @@ const LandingPage = () => {
           </header>
           <div className="max-w-5xl mx-auto text-center relative px-4 sm:px-10 mt-16">
             <h1 className="lg:text-7xl md:text-6xl text-4xl font-semibold mb-6 md:!leading-[80px]">
-              Your Dream Job with Ease
+              Find Your Dream Job with Ease
             </h1>
             <p className="text-base text-gray-400">
               Discover countless opportunities tailored to your skills and interests. Join our platform to connect with top companies and take the next step in your career journey.
