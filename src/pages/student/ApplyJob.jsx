@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import StudentRightBar from '../../components/StudentRightBar'
+
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { jwtDecode } from "jwt-decode";
+import StudentRightBar1 from '../../components/StudentRightBar1'
 // import PDFViewer from 'pdf-viewer-reactjs';
 // import PDFViewer from 'pdf-viewer-reactjs';
 // npm install @react-pdf-viewer/core @react-pdf-viewer/default-layout pdfjs-dist
@@ -137,7 +138,7 @@ const ApplyJob = () => {
       </div>
 
 
-      <StudentRightBar job={job} />
+      <StudentRightBar1 job={job} />
     </div>
   )
 }
