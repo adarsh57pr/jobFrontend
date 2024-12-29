@@ -7,180 +7,124 @@ import { loginUser } from '../../store/UserSlice'
 
 const Login = () => {
 
-   let dispatch = useDispatch()
-    let emailRef = useRef()
-    let passwordRef = useRef()
+  let dispatch = useDispatch()
+  let emailRef = useRef()
+  let passwordRef = useRef()
 
-    let navigate = useNavigate()
+  let navigate = useNavigate()
 
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        let obj = {
-         
-            email:emailRef.current.value,
-            password:passwordRef.current.value
-        }
+    let obj = {
 
-        console.log(obj)
-        
-        let res = await axios.post('https://jobbackend-6z5h.onrender.com/users/login',obj);
-        // console.log(res)
-        let data = res.data
-        console.log(data) // {msg:"", success:, token ,role} 
-
-        if(data.success){
-          localStorage.setItem('jobPortal',JSON.stringify({token:data.token, login:true,  role:data.role}))
-          dispatch(loginUser(data))
-
-          if(data.role==='student'){
-            navigate('/')
-            toast.success(data.msg,{position:'top-center'})
-          
-          }else{
-            navigate('/companyDashboard')
-            toast.success(data.msg,{position:'top-center'})
-          }
-           
-        }
-        else{
-            toast.error(data.msg,{position:'top-center'})
-        }
+      email: emailRef.current.value,
+      password: passwordRef.current.value
     }
+
+    console.log(obj)
+
+    let res = await axios.post('https://jobbackend-6z5h.onrender.com/users/login', obj);
+    // console.log(res)
+    let data = res.data
+    console.log(data) // {msg:"", success:, token ,role} 
+
+    if (data.success) {
+      localStorage.setItem('jobPortal', JSON.stringify({ token: data.token, login: true, role: data.role }))
+      dispatch(loginUser(data))
+
+      if (data.role === 'student') {
+        navigate('/')
+        toast.success(data.msg, { position: 'top-center' })
+
+      } else {
+        navigate('/companyDashboard')
+        toast.success(data.msg, { position: 'top-center' })
+      }
+
+    }
+    else {
+      toast.error(data.msg, { position: 'top-center' })
+    }
+  }
 
 
   return (
-    <div>
+    <div className=''>
 
-
-<section className="bg-white">
-  <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-    <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-      <img
-        alt=""
-        src="https://media.istockphoto.com/id/1394701218/photo/job-search-concept-find-your-career-woman-looking-at-online-website-by-laptop-computer-people.jpg?s=612x612&w=0&k=20&c=V32cT3dAoI7plQSnV-i7YxP43YvaoyA0jLS4729gNWM="
-        className="absolute inset-0 h-full w-full object-cover opacity-80"
-      />
-
-      <div className="hidden lg:relative lg:block lg:p-12">
-        <a className="block text-white" href="#">
-          <span className="sr-only">Home</span>
-          <svg
-            className="h-8 sm:h-10"
-            viewBox="0 0 28 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
-              fill="currentColor"
-            />
-          </svg>
-        </a>
-
-        <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-          Welcome to Squid 🦑
-        </h2>
-
-        <p className="mt-4 leading-relaxed text-white/90">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-          quibusdam aperiam voluptatum.
-        </p>
-      </div>
-    </section>
-
-    <main
-      className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
-    >
-      <div className="max-w-xl lg:max-w-3xl">
-        <div className="relative -mt-16 block lg:hidden">
-          <a
-            className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
-            href="#"
-          >
-            <span className="sr-only">Home</span>
-            <svg
-              className="h-8 sm:h-10"
-              viewBox="0 0 28 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
-                fill="currentColor"
-              />
-            </svg>
-          </a>
-
-          <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-            Welcome to Squid 🦑
-          </h1>
-
-          <p className="mt-4 leading-relaxed text-gray-500">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-            quibusdam aperiam voluptatum.
-          </p>
+      <div className="font-[sans-serif]">
+        <div className="grid lg:grid-cols-2 gap-4 max-lg:gap-12 bg-gradient-to-r from-blue-500 to-blue-700 px-8 py-12 h-[320px]">
+          <div>
+            <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui-white.svg" alt="logo" className="w-40" />
+            </a>
+            <div className="max-w-lg mt-16 max-lg:hidden">
+              <h3 className="text-3xl font-bold text-white">Sign in</h3>
+              <p className="text-sm mt-4 text-white">Embark on a seamless journey as you sign in to your account. Unlock a realm of opportunities and possibilities that await you.</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl sm:px-6 px-4 py-8 max-w-md w-full h-max shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-lg:mx-auto">
+            <form>
+              <div className="mb-8">
+                <h3 className="text-3xl font-extrabold text-gray-800">Sign in</h3>
+              </div>
+              <div className="sm:flex sm:items-start space-x-4 max-sm:space-y-4 mb-8">
+                <button type="button" className="py-2.5 px-4 text-sm font-semibold rounded-md text-blue-500 bg-blue-100 hover:bg-blue-200 focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" className="inline mr-4" viewBox="0 0 512 512">
+                    <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
+                    <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
+                    <path fill="#31aa52" d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z" data-original="#31aa52" />
+                    <path fill="#3c79e6" d="M512 256a258.24 258.24 0 0 0-4.192-46.377l-2.251-12.299H256v120h121.452a135.385 135.385 0 0 1-51.884 55.638l86.216 86.216a260.085 260.085 0 0 0 25.235-22.158C485.371 388.667 512 324.38 512 256z" data-original="#3c79e6" />
+                    <path fill="#cf2d48" d="m352.167 159.833 10.606 10.606 84.853-84.852-10.606-10.606C388.668 26.629 324.381 0 256 0l-60 60 60 60c36.326 0 70.479 14.146 96.167 39.833z" data-original="#cf2d48" />
+                    <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z" data-original="#eb4132" />
+                  </svg>
+                  Sign in with Google
+                </button>
+                <button type="button" className="py-2.5 px-4 text-sm font-semibold rounded-md text-blue-500 bg-blue-100 hover:bg-blue-200 focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="#007bff" viewBox="0 0 167.657 167.657">
+                    <path d="M83.829.349C37.532.349 0 37.881 0 84.178c0 41.523 30.222 75.911 69.848 82.57v-65.081H49.626v-23.42h20.222V60.978c0-20.037 12.238-30.956 30.115-30.956 8.562 0 15.92.638 18.056.919v20.944l-12.399.006c-9.72 0-11.594 4.618-11.594 11.397v14.947h23.193l-3.025 23.42H94.026v65.653c41.476-5.048 73.631-40.312 73.631-83.154 0-46.273-37.532-83.805-83.828-83.805z" data-original="#010002" />
+                  </svg>
+                </button>
+                <button type="button" className="py-2.5 px-4 text-sm font-semibold rounded-md text-blue-500 bg-blue-100 hover:bg-blue-200 focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="#000" viewBox="0 0 22.773 22.773">
+                    <path d="M15.769 0h.162c.13 1.606-.483 2.806-1.228 3.675-.731.863-1.732 1.7-3.351 1.573-.108-1.583.506-2.694 1.25-3.561C13.292.879 14.557.16 15.769 0zm4.901 16.716v.045c-.455 1.378-1.104 2.559-1.896 3.655-.723.995-1.609 2.334-3.191 2.334-1.367 0-2.275-.879-3.676-.903-1.482-.024-2.297.735-3.652.926h-.462c-.995-.144-1.798-.932-2.383-1.642-1.725-2.098-3.058-4.808-3.306-8.276v-1.019c.105-2.482 1.311-4.5 2.914-5.478.846-.52 2.009-.963 3.304-.765.555.086 1.122.276 1.619.464.471.181 1.06.502 1.618.485.378-.011.754-.208 1.135-.347 1.116-.403 2.21-.865 3.652-.648 1.733.262 2.963 1.032 3.723 2.22-1.466.933-2.625 2.339-2.427 4.74.176 2.181 1.444 3.457 3.028 4.209z" data-original="#000000" />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Email</label>
+                <div className="relative flex items-center">
+                  <input ref={emailRef} name="username" type="text" required className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter user name" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-4" viewBox="0 0 24 24">
+                    <circle cx={10} cy={7} r={6} data-original="#000000" />
+                    <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000" />
+                  </svg>
+                </div>
+              </div>
+              <div className="mt-4">
+                <label className="text-gray-800 text-sm mb-2 block">Password</label>
+                <div className="relative flex items-center">
+                  <input ref={passwordRef} name="password" type="password" required className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter password" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-4 cursor-pointer" viewBox="0 0 128 128">
+                    <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000" />
+                  </svg>
+                </div>
+              </div>
+              <div className="mt-4 text-right">
+                <a href="jajvascript:void(0);" className="text-blue-600 text-sm font-semibold hover:underline">
+                  Forgot your password?
+                </a>
+              </div>
+              <div className="mt-8">
+                <button onClick={handleSubmit} type="submit" className="w-full shadow-xl py-3 px-6 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                  Log in
+                </button>
+              </div>
+              <p className="text-sm mt-8 text-center text-gray-800">Don't have an account <Link to="/signup" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</Link></p>
+            </form>
+          </div>
         </div>
-
-        <form action="#" className="mt-8 grid grid-cols-6 gap-6">
-         
-
-          
-
-          <div className="col-span-6">
-            <label htmlFor="Email" className=" block text-sm font-medium text-gray-700"> Email </label>
-
-            <input
-            ref={emailRef}
-              type="email"
-              id="Email"
-              name="email"
-              className="mt-1 py-2 border-2 border-gray-400 w-full rounded-md bg-white text-sm text-gray-700 shadow-sm"
-            />
-          </div>
-
-          <div className="col-span-6 ">
-            <label htmlFor="Password" className=" block text-sm font-medium text-gray-700"> Password </label>
-
-            <input
-            ref={passwordRef}
-              type="password"
-              id="Password"
-              name="password"
-              className="mt-1 py-2 border-2 border-gray-400 w-full rounded-md  bg-white text-sm text-gray-700 shadow-sm"
-            />
-          </div>
-
-
-   
-
-          <div className="col-span-6">
-            <p className="text-sm text-gray-500">
-              By creating an account, you agree to our
-              <a href="#" className="text-gray-700 underline"> terms and conditions </a>
-              and
-              <a href="#" className="text-gray-700 underline">privacy policy</a>.
-            </p>
-          </div>
-
-          <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-            <button
-            onClick={handleSubmit}
-              className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-            >
-              Log in
-            </button>
-
-            <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-              Don't have an account?
-              <Link to="/signup" className="text-gray-700 underline">Signup</Link>.
-            </p>
-          </div>
-        </form>
       </div>
-    </main>
-  </div>
-</section>
+
     </div>
   )
 }

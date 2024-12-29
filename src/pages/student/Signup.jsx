@@ -3,167 +3,118 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const Signup = () => {
-    let nameRef = useRef()
-    let emailRef = useRef()
-    let passwordRef = useRef()
+  let nameRef = useRef()
+  let emailRef = useRef()
+  let passwordRef = useRef()
 
-    let navigate = useNavigate()
+  let navigate = useNavigate()
 
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        let obj = {
-            name:nameRef.current.value,
-            email:emailRef.current.value,
-            password:passwordRef.current.value
-        }
-
-        console.log(obj)
-      try {
-        let res = await fetch('https://jobbackend-6z5h.onrender.com/users/create',{
-            method:"POST",
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(obj)
-        })
-
-        let data = await res.json();
-        console.log(data)
-        if(data.success){
-            navigate('/login')
-            toast.success(data.msg,{position:'top-left'})
-        }
-        else{
-            toast.error(data.msg,{position:'top-left'})
-        }
-      } catch (error) {
-        toast.error('server error',{position:'top-left'})
-      }
+    let obj = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value
     }
+
+    console.log(obj)
+    try {
+      let res = await fetch('https://jobbackend-6z5h.onrender.com/users/create', {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+      })
+
+      let data = await res.json();
+      console.log(data)
+      if (data.success) {
+        navigate('/login')
+        toast.success(data.msg, { position: 'top-left' })
+      }
+      else {
+        toast.error(data.msg, { position: 'top-left' })
+      }
+    } catch (error) {
+      toast.error('server error', { position: 'top-left' })
+    }
+  }
 
   return (
     <div>
 
-
-<section className="relative flex flex-wrap lg:h-screen lg:items-center">
-  <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-    <div className="mx-auto max-w-lg text-center">
-      <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
-
-      <p className="mt-4 text-gray-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque
-        ipsa culpa autem, at itaque nostrum!
-      </p>
-    </div>
-
-    <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
-      <div>
-        <label htmlFor="name" className="sr-only">Name</label>
-
-        <div className="relative">
-          <input
-          ref={nameRef}
-            type="text"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter name"
-          />
-
-       
-        </div>
-      </div>
-      <div>
-        <label htmlFor="email" className="sr-only">Email</label>
-
-        <div className="relative">
-          <input
-          ref={emailRef}
-            type="email"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter email"
-          />
-
-          <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="password" className="sr-only">Password</label>
-
-        <div className="relative">
-          <input
-          ref={passwordRef}
-            type="password"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter password"
-          />
-
-          <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              />
-            </svg>
-          </span>
+      <div className="font-[sans-serif] bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">
+        <div className="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">
+          <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-gray-900 to-gray-700 lg:px-8 px-4 py-4">
+            <div>
+              <h4 className="text-white text-lg font-semibold">Create Your Account</h4>
+              <p className="text-[13px] text-gray-300 mt-3 leading-relaxed">Welcome to our registration page! Get started by creating your account.</p>
+            </div>
+            <div>
+              <h4 className="text-white text-lg font-semibold">Simple &amp; Secure Registration</h4>
+              <p className="text-[13px] text-gray-300 mt-3 leading-relaxed">Our registration process is designed to be straightforward and secure. We prioritize your privacy and data security.</p>
+            </div>
+          </div>
+          <form className="md:col-span-2 w-full py-6 px-6 sm:px-16">
+            <div className="mb-6">
+              <h3 className="text-gray-800 text-2xl font-bold">Create an account</h3>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Name</label>
+                <div className="relative flex items-center">
+                  <input ref={nameRef} name="name" type="text" required className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500" placeholder="Enter name" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
+                    <circle cx={10} cy={7} r={6} data-original="#000000" />
+                    <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Email Id</label>
+                <div className="relative flex items-center">
+                  <input ref={emailRef} name="email" type="email" required className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500" placeholder="Enter email" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4" viewBox="0 0 682.667 682.667">
+                    <defs>
+                      <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                        <path d="M0 512h512V0H0Z" data-original="#000000" />
+                      </clipPath>
+                    </defs>
+                    <g clipPath="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                      <path fill="none" strokeMiterlimit={10} strokeWidth={40} d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000" />
+                      <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <label className="text-gray-800 text-sm mb-2 block">Password</label>
+                <div className="relative flex items-center">
+                  <input ref={passwordRef} name="password" type="password" required className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500" placeholder="Enter password" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4 cursor-pointer" viewBox="0 0 128 128">
+                    <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                  I accept the <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
+                </label>
+              </div>
+            </div>
+            <div className="!mt-12">
+              <button onClick={handleSubmit} type="submit" className="w-full py-3 px-4 tracking-wider text-sm rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none">
+                Create an account
+              </button>
+            </div>
+            <p className="text-gray-800 text-sm mt-6 text-center">Already have an account? <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1">Login here</Link></p>
+          </form>
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">
-          Already have an account?
-          <Link className="underline" to="/login">Log in</Link>
-        </p>
-
-        <button
-
-        onClick={handleSubmit}
-          type="submit"
-          className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-        >
-          Sign up
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
-    <img
-      alt=""
-      src="https://wallpaperaccess.com/full/6434096.jpg"
-      className="absolute inset-0 h-full w-full object-cover"
-    />
-  </div>
-</section>
     </div>
   )
 }
