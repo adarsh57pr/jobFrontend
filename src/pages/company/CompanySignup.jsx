@@ -32,7 +32,7 @@ const CompanySignup = () => {
       let data = await res.json();
       console.log(data)
       if (data.success) {
-        navigate('/companyLogin')
+        navigate('/login')
         toast.success(data.msg, { position: 'top-left' })
       }
       else {
