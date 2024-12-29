@@ -7,7 +7,7 @@ const StudentRightBar1 = (props) => {
 
   return (
     <div className=''>
-      <div className="m-5 h-[600px] overflow-auto w-80 rounded-lg border-2 border-gray-100 py-8 px-5 shadow-xl shadow-teal-300">
+      <div className="m-5 h-[600px] bg-black overflow-auto w-80 rounded-lg border-2 border-gray-100 py-8 px-5 shadow-xl shadow-teal-300">
         <p className="text-lg font-bold capitalize">{job.company}</p>
         <img className='rounded' src={job.image} alt="" />
         <p className="mt-3 text-4xl font-bold">{job.jobRole}</p>
