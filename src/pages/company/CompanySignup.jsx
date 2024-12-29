@@ -11,14 +11,12 @@ const CompanySignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     let obj = {
       name: nameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
       role: 'company'
     }
-
     console.log(obj)
     try {
       let res = await fetch('https://jobbackend-6z5h.onrender.com/users/create', {
