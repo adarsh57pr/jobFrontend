@@ -17,6 +17,7 @@ import Navbar from './components/Navbar'
 import CreateJob from './pages/company/CreateJob'
 import OurCompanyJobs from './pages/company/OurCompanyJobs'
 import ApplyJob from './pages/student/ApplyJob'
+import ForgetPassword from './pages/ForgetPassword'
 
 function App() {
   
@@ -42,7 +43,8 @@ function App() {
           <Route path='/companyDashboard' element={login===true && role==='company'?  <CompanyDashboard/>:<Navigate to='/login'/>}/>
           <Route path='/companyDashboard/createJob' element={login===true && role==='company'? <CreateJob/>:""}/>
           <Route path='/ourCompanyJobs' element={<OurCompanyJobs/>}/>
-          <Route path='/applyJob' element={<ApplyJob  />}/>
+          <Route path='/applyJob' element={<ApplyJob/>}/>
+          <Route path='/forgetPassword' element={<ForgetPassword/>}/>
         <Route path='/*' element={<PNF/>}/>
         </Routes>
 

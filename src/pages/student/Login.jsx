@@ -55,7 +55,7 @@ const Login = () => {
       <div className="font-[sans-serif]">
         <div className="grid lg:grid-cols-2 gap-4 max-lg:gap-12 bg-gradient-to-r from-blue-500 to-blue-700 px-8 py-12 h-[320px]">
           <div>
-            <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui-white.svg" alt="logo" className="w-40" />
+            <a href="#"><img src="https://readymadeui.com/readymadeui-white.svg" alt="logo" className="w-40" />
             </a>
             <div className="max-w-lg mt-16 max-lg:hidden">
               <h3 className="text-3xl font-bold text-white">Sign in</h3>
@@ -110,9 +110,9 @@ const Login = () => {
                 </div>
               </div>
               <div className="mt-4 text-right">
-                <a href="jajvascript:void(0);" className="text-blue-600 text-sm font-semibold hover:underline">
+                <Link to={'/forgetPassword'} className="text-blue-600 text-sm font-semibold hover:underline">
                   Forgot your password?
-                </a>
+                </Link>
               </div>
               <div className="mt-8">
                 <button onClick={handleSubmit} type="submit" className="w-full shadow-xl py-3 px-6 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">

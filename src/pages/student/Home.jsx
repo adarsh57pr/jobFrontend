@@ -73,8 +73,9 @@ const Home = () => {
 
   return (
     <div className=''>
-      <div className='py-16 w-2/3'>
-      <div className='flex md:flex-row justify-center gap-4 flex-col mt-5 py-2 px-4 rounded-md w-max m-auto bg-slate-200'>
+      <div className=' py-16 w-2/3'>
+     <div>
+     <div className='flex md:flex-row justify-center gap-4 flex-col mt-5 py-2 px-4 rounded-md w-max m-auto bg-slate-200'>
         <input onChange={searchChanger} name='title' type="text" className='px-3 py-2 border-2 rounded-md' placeholder='search a job' />
         <input onChange={searchChanger} name='location' type="text" className='px-3 py-2 border-2 rounded-md' placeholder='search a location' />
         <button onClick={handleJobSubmit} className='bg-blue-700 hover:bg-blue-900 px-4 py-1 rounded-md  text-white'>search job</button>
@@ -134,6 +135,7 @@ const Home = () => {
                 : 'No match found related to this job'
             }
           </div>}
+     </div>
         <div className='fixed top-16 right-10'> {show === true ? <StudentRightBar1 job={Viewjob} /> : ''}</div>
       </div>
 
